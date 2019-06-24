@@ -7,6 +7,7 @@ import (
 	"os"
 	"runtime"
 
+	instana "github.com/instana/go-sensor"
 	"github.com/prometheus/client_golang/prometheus"
 	log "github.com/sirupsen/logrus"
 	_ "github.com/sylr/go-lev/api"
@@ -16,6 +17,7 @@ import (
 var (
 	version   = "dev"
 	goVersion = runtime.Version()
+	sensor    = instana.NewSensor("go-lev")
 )
 
 var (
