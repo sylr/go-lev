@@ -2,12 +2,27 @@
 github.com/agnivade/levenshtein
 # github.com/beorn7/perks v1.0.0
 github.com/beorn7/perks/quantile
+# github.com/felixge/httpsnoop v1.0.0
+github.com/felixge/httpsnoop
+# github.com/gogo/protobuf v1.1.1
+github.com/gogo/protobuf/proto
 # github.com/golang/protobuf v1.3.1
 github.com/golang/protobuf/proto
+# github.com/instana/go-sensor v1.4.16
+github.com/instana/go-sensor
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1
 github.com/konsorten/go-windows-terminal-sequences
+# github.com/looplab/fsm v0.1.0
+github.com/looplab/fsm
 # github.com/matttproud/golang_protobuf_extensions v1.0.1
 github.com/matttproud/golang_protobuf_extensions/pbutil
+# github.com/opentracing/basictracer-go v1.0.0
+github.com/opentracing/basictracer-go
+github.com/opentracing/basictracer-go/wire
+# github.com/opentracing/opentracing-go v1.1.0
+github.com/opentracing/opentracing-go
+github.com/opentracing/opentracing-go/ext
+github.com/opentracing/opentracing-go/log
 # github.com/prometheus/client_golang v1.0.0
 github.com/prometheus/client_golang/prometheus
 github.com/prometheus/client_golang/prometheus/promhttp

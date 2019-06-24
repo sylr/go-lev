@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: go-lev
+    maintainer: team-ops
   name: go-lev
 spec:
   progressDeadlineSeconds: 600
@@ -28,7 +29,7 @@ spec:
     spec:
       containers:
       - image: quay.io/sylr/go-lev:master
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: go-lev
         ports:
         - name: http

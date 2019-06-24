@@ -4,8 +4,7 @@ kind: Service
 metadata:
   labels:
     app: go-lev
-    heritage: Tiller
-    release: consul
+    maintainer: team-ops
   name: go-lev
 spec:
   clusterIP: None
