@@ -16,6 +16,7 @@ import (
 var (
 	mutex   = sync.RWMutex{}
 	Stopped = false
+	sensor	= instana.NewSensor("go-lev-http")
 )
 
 func init() {
