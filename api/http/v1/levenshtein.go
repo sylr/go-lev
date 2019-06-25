@@ -6,19 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/sylr/go-lev/rand"
-
 	"github.com/agnivade/levenshtein"
+	"github.com/sylr/go-lev/rand"
 )
-
-func stopped(w http.ResponseWriter, r *http.Request) bool {
-	if Stopped {
-		http.NotFound(w, r)
-		return true
-	}
-
-	return false
-}
 
 func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 	if stopped(w, r) {
