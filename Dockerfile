@@ -1,4 +1,4 @@
-FROM golang:1.12-alpine3.9 as builder
+FROM golang:1.14-alpine3.11 as builder
 
 ADD . $GOPATH/src/github.com/sylr/go-lev
 WORKDIR $GOPATH/src/github.com/sylr/go-lev
@@ -10,7 +10,7 @@ RUN git update-index --refresh; make install
 
 # -----------------------------------------------------------------------------
 
-FROM alpine:3.9
+FROM alpine:3.11
 
 WORKDIR /usr/local/bin
 RUN apk --no-cache add ca-certificates
