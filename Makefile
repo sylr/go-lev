@@ -9,8 +9,4 @@ build:
 install:
 	go install -ldflags "-X main.version=$(GIT_DESCRIBE)"
 
-vendor:
-	go mod vendor
-	git add vendor && git diff --cached --exit-code > /dev/null || git commit -s -m "Update vendored libs"
-
-.PHONY: build install vendor
+.PHONY: build install
