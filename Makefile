@@ -1,4 +1,4 @@
-GIT_DESCRIBE ?= $(shell git describe --tags --dirty --broken || git rev-parse --short HEAD)
+GIT_DESCRIBE ?= $(shell git describe --tags --dirty --broken 2>/dev/null || git rev-parse --short HEAD)
 GO111MODULE  ?= on
 
 export GO111MODULE
