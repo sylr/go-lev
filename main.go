@@ -10,7 +10,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	log "github.com/sirupsen/logrus"
 	_ "github.com/sylr/go-lev/api"
-	"github.com/sylr/prometheus-azure-exporter/pkg/tools"
 )
 
 var (
@@ -35,7 +34,6 @@ func init() {
 	log.SetFormatter(&log.TextFormatter{
 		DisableColors:  true,
 		DisableSorting: false,
-		SortingFunc:    tools.SortLogKeys,
 	})
 
 	// Output to stdout instead of the default stderr
