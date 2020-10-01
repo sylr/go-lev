@@ -8,7 +8,6 @@ import (
 	"runtime"
 
 	"github.com/prometheus/client_golang/prometheus"
-	log "github.com/sirupsen/logrus"
 	_ "github.com/sylr/go-lev/api"
 )
 
@@ -25,26 +24,14 @@ var (
 			Name:      "build_info",
 			Help:      "Go levenshtein build info",
 		},
-		[]string{"version", "goversion"},
+		[]string{"version"},
 	)
 )
 
 func init() {
-	// Log as JSON instead of the default ASCII formatter.
-	log.SetFormatter(&log.TextFormatter{
-		DisableColors:  true,
-		DisableSorting: false,
-	})
-
-	// Output to stdout instead of the default stderr
-	// Can be any io.Writer, see below for File example
-	log.SetOutput(os.Stdout)
-
-	// Only log the info severity or above.
-	log.SetLevel(log.InfoLevel)
-
 	// Register build info
 	prometheus.MustRegister(goLevenshteinBuildInfo)
+	goLevenshteinBuildInfo.WithLabelValues(version).Set(1)
 }
 
 func main() {
@@ -52,7 +39,7 @@ func main() {
 	err := http.ListenAndServe("0.0.0.0:8080", nil)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("%v", err)
 		os.Exit(1)
 	}
 }

@@ -4,9 +4,9 @@ GO111MODULE  ?= on
 export GO111MODULE
 
 build:
-	go build -ldflags "-X main.version=$(GIT_DESCRIBE)"
+	CGO_ENABLED=0 go build -ldflags "-extldflags '-static' -w -s -X main.version=$(GIT_DESCRIBE)"
 
 install:
-	go install -ldflags "-X main.version=$(GIT_DESCRIBE)"
+	CGO_ENABLED=0 go install -ldflags "-extldflags '-static' -w -s -X main.version=$(GIT_DESCRIBE)"
 
 .PHONY: build install
