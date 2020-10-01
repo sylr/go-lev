@@ -1,11 +1,13 @@
 module github.com/sylr/go-lev
 
-go 1.12
+go 1.15
 
 require (
-	github.com/agnivade/levenshtein v1.0.2
-	github.com/go-logfmt/logfmt v0.4.0 // indirect
-	github.com/prometheus/client_golang v1.0.0
-	github.com/sirupsen/logrus v1.4.2
-	github.com/sylr/prometheus-azure-exporter v0.5.0
+	github.com/agnivade/levenshtein v1.1.0
+	github.com/prometheus/client_golang v1.7.1
+	github.com/prometheus/common v0.14.0 // indirect
+	github.com/prometheus/procfs v0.2.0 // indirect
+	github.com/sylr/go-libqd/sync v0.1.2
+	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
+	google.golang.org/protobuf v1.25.0 // indirect
 )

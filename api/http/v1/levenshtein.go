@@ -3,12 +3,15 @@ package v1
 import (
 	"fmt"
 	"net/http"
+	"runtime"
 	"strconv"
+	"sync"
+	"sync/atomic"
 	"time"
 
-	"github.com/sylr/go-lev/rand"
-
 	"github.com/agnivade/levenshtein"
+	"github.com/sylr/go-lev/rand"
+	qdsync "github.com/sylr/go-libqd/sync"
 )
 
 func stopped(w http.ResponseWriter, r *http.Request) bool {
@@ -25,7 +28,7 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tests := 0
+	tests := int64(0)
 	count := 500
 	max := 22
 	httpParams := r.URL.Query()
@@ -43,18 +46,30 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 	hashes := rand.GetRandomHashSlice(count)
 
 	start := time.Now()
+	wg := qdsync.NewCancelableWaitGroup(r.Context(), runtime.NumCPU())
+	mu := sync.Mutex{}
 
 	for i := 0; i < count; i++ {
-		for j := i + 1; j < count; j++ {
-			lev := levenshtein.ComputeDistance(hashes[i], hashes[j])
+		wg.Add(1)
 
-			if lev < max {
-				fmt.Fprintf(w, "%s to %s = %d\n", hashes[i], hashes[j], lev)
+		go func(i int) {
+			for j := i + 1; j < count; j++ {
+				lev := levenshtein.ComputeDistance(hashes[i], hashes[j])
+
+				if lev < max {
+					mu.Lock()
+					fmt.Fprintf(w, "%s to %s = %d\n", hashes[i], hashes[j], lev)
+					mu.Unlock()
+				}
 			}
 
-			tests++
-		}
+			atomic.AddInt64(&tests, int64(count-(i+1)))
+
+			wg.Done()
+		}(i)
 	}
+
+	wg.Wait()
 
 	end := time.Since(start)
 
