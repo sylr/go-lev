@@ -11,7 +11,7 @@ import (
 
 	"github.com/agnivade/levenshtein"
 	"github.com/sylr/go-lev/rand"
-	qdsync "github.com/sylr/go-libqd/sync"
+	qdsync "sylr.dev/libqd/sync"
 )
 
 func stopped(w http.ResponseWriter, r *http.Request) bool {
