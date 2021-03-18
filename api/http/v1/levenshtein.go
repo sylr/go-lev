@@ -48,6 +48,7 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
 	wg := qdsync.NewBoundedWaitGroup(runtime.NumCPU())
 	mu := sync.Mutex{}
+	total := 0
 
 	for i := 0; i < count; i++ {
 		wg.Add(1)
@@ -58,6 +59,7 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 
 				if lev < max {
 					mu.Lock()
+					total++
 					fmt.Fprintf(w, "%s to %s = %d\n", hashes[i], hashes[j], lev)
 					mu.Unlock()
 				}
@@ -73,8 +75,11 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 
 	end := time.Since(start)
 
+	goLevDistanceResultsHistogram.WithLabelValues(strconv.Itoa(count), strconv.Itoa(max)).Observe(float64(total))
+
 	fmt.Fprintf(w, "\n")
 	fmt.Fprintf(w, "Tests: %12d\n", tests)
+	fmt.Fprintf(w, "Found: %12d\n", total)
 	fmt.Fprintf(w, "Time: %13f secs\n", end.Seconds())
 }
 
