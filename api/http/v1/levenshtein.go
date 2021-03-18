@@ -46,7 +46,7 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 	hashes := rand.GetRandomHashSlice(count)
 
 	start := time.Now()
-	wg := qdsync.NewCancelableWaitGroup(r.Context(), runtime.NumCPU())
+	wg := qdsync.NewBoundedWaitGroup(runtime.NumCPU())
 	mu := sync.Mutex{}
 
 	for i := 0; i < count; i++ {
