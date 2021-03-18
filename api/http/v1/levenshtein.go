@@ -39,8 +39,8 @@ func httpGetRandom(w http.ResponseWriter, r *http.Request) {
 		count, _ = strconv.Atoi(c[0])
 	}
 
-	if c, ok := httpParams["max"]; ok {
-		max, _ = strconv.Atoi(c[0])
+	if m, ok := httpParams["max"]; ok {
+		max, _ = strconv.Atoi(m[0])
 	}
 
 	hashes := rand.GetRandomHashSlice(count)
