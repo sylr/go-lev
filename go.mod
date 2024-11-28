@@ -1,15 +1,21 @@
 module github.com/sylr/go-lev
 
-go 1.15
+go 1.23
 
 require (
-	github.com/agnivade/levenshtein v1.1.1
-	github.com/cespare/xxhash/v2 v2.1.2 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/prometheus/client_golang v1.11.0
-	github.com/prometheus/common v0.30.0 // indirect
-	github.com/prometheus/procfs v0.7.3 // indirect
-	golang.org/x/sys v0.0.0-20210917161153-d61c044b1678 // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
+	github.com/agnivade/levenshtein v1.2.0
+	github.com/prometheus/client_golang v1.20.5
 	sylr.dev/libqd/sync v0.0.0-20210116223455-05eb9c839987
+)
+
+require (
+	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/klauspost/compress v1.17.11 // indirect
+	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
+	github.com/prometheus/client_model v0.6.1 // indirect
+	github.com/prometheus/common v0.60.1 // indirect
+	github.com/prometheus/procfs v0.15.1 // indirect
+	golang.org/x/sys v0.27.0 // indirect
+	google.golang.org/protobuf v1.35.2 // indirect
 )

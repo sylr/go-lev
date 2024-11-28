@@ -1,17 +1,27 @@
-FROM golang:1.17 as builder
+FROM --platform=$BUILDPLATFORM golang:1.23 AS builder
 
-ADD . $GOPATH/src/github.com/sylr/go-lev
-WORKDIR $GOPATH/src/github.com/sylr/go-lev
+WORKDIR /go/src/go-lev
 
-RUN uname -a && go version
-RUN git update-index --refresh; make install
+COPY go*.mod go*.sum ./
 
-# -----------------------------------------------------------------------------
+RUN go mod download
+
+COPY . .
+
+ARG TARGETOS
+ARG TARGETARCH
+
+# Switch shell to bash
+SHELL ["bash", "-c"]
+
+RUN git update-index --refresh; GOOS=$TARGETOS GOARCH=$TARGETARCH make build
+
+# ------------------------------------------------------------------------------
 
 FROM scratch
 
 WORKDIR /usr/local/bin
 
-COPY --from=builder "/go/bin/go-lev" .
+COPY --from=builder /go/src/go-lev/go-lev .
 
 ENTRYPOINT ["/usr/local/bin/go-lev"]
